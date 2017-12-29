@@ -19,3 +19,8 @@ class Post(models.Model):
         return '{} on {}'.format(
                     self.title,
                     self.pub_date.strftime('%y-%m-%d'))
+
+    class Meta:
+        verbose_name = 'blog posts'
+        ordering = ['-pub_date', 'title']
+        get_latest_by = 'pub_date'

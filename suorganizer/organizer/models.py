@@ -10,6 +10,8 @@ class Tag(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        ordering = ['name']
 
 
 class StartUp(models.Model):
@@ -25,6 +27,10 @@ class StartUp(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        ordering = ['name']
+        get_latest_by = 'founded_date'
+
 
 class NewsLink(models.Model):
     title = models.CharField(max_length=70)
@@ -34,3 +40,8 @@ class NewsLink(models.Model):
 
     def __str__(self):
         return '{}:{}'.format(self.startup, self.title)
+
+    class Meta:
+        verbose_name = 'news article'
+        ordering = ['-pub_date']
+        get_latest_by = 'pub_date'
