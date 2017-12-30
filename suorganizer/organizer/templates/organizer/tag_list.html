@@ -1,6 +1,10 @@
+{% extends parent_template|default:"organizer/base_organizer.html" %}
+{% block title %}
+{{block.super}} - Tag List
+{% endblock %}
 
-<h2>Tag List</h2>
-{# {% if tag_list %}#}
+{% block content %}
+<!--{% if tag_list %}-->
 <ul>
   {% for tag in tag_list %}
   <li>
@@ -16,3 +20,4 @@
 </ul>
 
 {# <p>Sorry there are No Tags Available at the moment</p>#}
+{% endblock %}

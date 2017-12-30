@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>
+      {% block title %}
+        Startup Organizer
+      {% endblock %}
+
+    </title>
+  </head>
+
+  <body>
+<div>
+  <header>
+    <h1>Startup Organizer</h1>
+  </header>
+  <main>
+    {% block content %}
+    This is a default content
+    {% endblock %}
+
+  </main>
+</div>
+
+<footer>
+<p>
+&copy;2017
+<a href="http://www.google.com"> Sam Ghadri</a>
+</p>
+<p>
+Created for
+<a href="http://www.github.com"> Sam Django Solutions</a>
+</p>
+</footer>
+
+
+
+  </body>
+</html>
