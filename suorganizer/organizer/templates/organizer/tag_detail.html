@@ -1,0 +1,39 @@
+
+
+<h2> {{ tag.name }} </h2>
+{% if tag.startup_set.all %}
+<section>
+
+<h3>Startups</h3>
+
+<ul>
+{% for startup in tag.startup_set.all %}
+<li><a href="#">
+  {{ startup.name|title }}
+</a></li>
+
+{% endfor %}
+</ul>
+</section>
+{% else %}
+<p>Sorry! this Tag is Not associated with any startup!!</p>
+{% endif %}
+
+{% if tag.blog_posts.all %}
+<section>
+  <h3>Blog Posts</h3>
+  <ul>
+      {% for post in tag.blog_posts.all %}
+      <li>
+        <a href="#">
+          {{ post.title|title }}
+        </a>
+      </li>
+      {% endfor %}
+  </ul>
+</section>
+{% endif %}
+{% if not tag.startup_set.all and no tag.blog_posts.all %}
+<p>Sorry this Tag is not associated with any content </p>
+
+{% endif %}
