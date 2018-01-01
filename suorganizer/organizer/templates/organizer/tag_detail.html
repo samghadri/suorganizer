@@ -43,7 +43,8 @@
   </ul>
 </section>
 {% endif %}
-{% if not tag.startup_set.all and no tag.blog_posts.all %}
+
+{% if not tag.startup_set.all and not tag.blog_posts.all %}
 <p>Sorry this Tag is not associated with any content </p>
 
 {% endif %}

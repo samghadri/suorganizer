@@ -19,5 +19,6 @@ from organizer.views import homepage
 
 urlpatterns = [
     url(r'^$', homepage),
+    url(r'^organizer/',include('organizer.urls', namespace='organizer')),
     url(r'^admin/', admin.site.urls),
 ]
