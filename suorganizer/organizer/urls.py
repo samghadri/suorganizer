@@ -8,5 +8,4 @@ urlpatterns =[
     url(r'^startup/(?P<slug>[-\w]+)/$', views.startup_detail, name='organizer_startup_detail'),
     url(r'^tag/$', views.tag_list, name='organizer_tag_list'),
     url(r'^tag/(?P<slug>[-\w]+)/$', views.tag_detail, name='organizer_tag_detail'),
-
 ]

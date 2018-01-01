@@ -16,8 +16,10 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from blog import urls as blog_urls
+from . import views
 
 urlpatterns = [
+    url(r'^$',views.redirect_root),
     url(r'^blog/', include(blog_urls)),
     url(r'^',include('organizer.urls', namespace='organizer')),
     url(r'^admin/', admin.site.urls),
