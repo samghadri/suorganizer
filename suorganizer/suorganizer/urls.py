@@ -15,10 +15,10 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from organizer.views import homepage
+from blog import urls as blog_urls
 
 urlpatterns = [
-    url(r'^$', homepage),
-    url(r'^organizer/',include('organizer.urls', namespace='organizer')),
+    url(r'^blog/', include(blog_urls)),
+    url(r'^',include('organizer.urls', namespace='organizer')),
     url(r'^admin/', admin.site.urls),
 ]
