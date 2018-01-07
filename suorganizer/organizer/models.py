@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.urlresolvers import reverse
 # from blog.models import Post
 
 class Tag(models.Model):
@@ -10,8 +11,12 @@ class Tag(models.Model):
     def __str__(self):
         return self.name.title()
 
+
     class Meta:
         ordering = ['name']
+
+    def get_absolute_url(self):
+        return reverse('organizer:organizer_tag_detail', kwargs={'slug':self.slug})
 
 
 class StartUp(models.Model):
@@ -24,12 +29,19 @@ class StartUp(models.Model):
     website = models.URLField(max_length=255)
     tags = models.ManyToManyField(Tag)
 
+    def get_absolute_url(self):
+        return reverse('organizer:organizer_startup_detail', kwargs={'slug':self.slug})
+
     def __str__(self):
         return self.name
+
 
     class Meta:
         ordering = ['name']
         get_latest_by = 'founded_date'
+
+
+
 
 
 class NewsLink(models.Model):
