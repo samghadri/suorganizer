@@ -16,7 +16,8 @@ class Tag(models.Model):
         ordering = ['name']
 
     def get_absolute_url(self):
-        return reverse('organizer:organizer_tag_detail', kwargs={'slug':self.slug})
+        return reverse('organizer:organizer_tag_detail',
+                        kwargs={'slug':self.slug})
 
 
 class StartUp(models.Model):
@@ -29,8 +30,6 @@ class StartUp(models.Model):
     website = models.URLField(max_length=255)
     tags = models.ManyToManyField(Tag)
 
-    def get_absolute_url(self):
-        return reverse('organizer:organizer_startup_detail', kwargs={'slug':self.slug})
 
     def __str__(self):
         return self.name
@@ -41,7 +40,9 @@ class StartUp(models.Model):
         get_latest_by = 'founded_date'
 
 
-
+    def get_absolute_url(self):
+        return reverse('organizer:organizer_startup_detail',
+                        kwargs={'slug':self.slug})
 
 
 class NewsLink(models.Model):
