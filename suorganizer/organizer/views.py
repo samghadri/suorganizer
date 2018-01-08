@@ -18,8 +18,9 @@ def tag_detail(request, slug):
     tag = get_object_or_404(Tag, slug__iexact=slug)
     return render(request,'organizer/tag_detail.html', {'tag':tag})
     # template = loader.get_template('organizer/tag_detail.html')
-    # context = RequestContext(request,{'tag': tag})
+    # context = {'tag': tag}
     # return HttpResponse(template.render(context))
+
 
 def startup_list(request):
     return render(request, 'organizer/startup_list.html',
