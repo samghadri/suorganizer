@@ -11,7 +11,7 @@ class Post(models.Model):
                             unique_for_month='pub_date',
                             help_text = 'A label for URL config')
     text = models.TextField()
-    pub_date = models.DateTimeField(auto_now_add=True)
+    pub_date = models.DateTimeField('date published', auto_now_add=True)
     tags = models.ManyToManyField(Tag, related_name='blog_posts')
     startups = models.ManyToManyField(StartUp, related_name='blog_posts')
 
