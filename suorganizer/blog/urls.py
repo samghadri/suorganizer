@@ -1,6 +1,8 @@
 from django.conf.urls import url
 from . import views
 
+
+
 urlpatterns=[
     url(r'^$', views.PostList.as_view(), name='blog_post_list'),
     url(r'^(?P<year>\d{4})/'

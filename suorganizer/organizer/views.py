@@ -1,5 +1,8 @@
+from django.shortcuts import get_object_or_404, render,redirect
 from .models import Tag, StartUp
-from django.shortcuts import get_object_or_404, render
+from .forms import TagForm
+from django.views.generic import View
+
 # from django.http.response import HttpResponse
 # from django.template import loader, RequestContext
 
@@ -13,6 +16,31 @@ def tag_list(request):
     # output = template.render(context)
     # return HttpResponse(output)
 
+# def tag_create(request):
+#     if request.method == 'POST':
+#         form = TagForm(request.POST)
+#         if form.is_valid():
+#             new_tag = form.save()
+#             new_tag.save()
+#             return redirect(new_tag)
+#         else:
+#             form = TagForm()
+#         return render(request, 'organizer/tag_form.html', {'form':form})
+
+class TagCreate(View):
+    form_class = TagForm
+    template_name = 'organizer/tag_form.html'
+
+    def get(self, request):
+        return render(request, self.template_name, {'form':self.form_class()})
+
+    def post(self, request):
+        bound_form = self.form_class(request.POST)
+        if bound_form.is_valid():
+            new_tag = bound_form.save()
+            return redirect(new_tag)
+        else:
+            return render(request, self.template_name,{'form':bound_form})
 
 def tag_detail(request, slug):
     tag = get_object_or_404(Tag, slug__iexact=slug)
