@@ -1,9 +1,33 @@
 from django import forms
 from django.core.exceptions import ValidationError
-from .models import Tag
+from .models import Tag, NewsLink, StartUp
 
 
-class TagForm(forms.ModelForm):
+
+class NewsLinkForm(forms.ModelForm):
+    class Meta:
+        model = NewsLink
+        fields = '__all__'
+
+
+class SlugCleanMixin:
+
+    def clean_slug(self):
+        new_slug =(self.cleaned_data['slug'].lower())
+        if new_slug == 'create':
+            raise ValidationError('The Slug can not be create!!')
+        return new_slug
+
+
+
+class StartUpForm(SlugCleanMixin, forms.ModelForm):
+    class Meta:
+        model = StartUp
+        fields = '__all__'
+
+
+
+class TagForm(SlugCleanMixin, forms.ModelForm):
     # name = forms.CharField(max_length=40)
     # slug = forms.SlugField(max_length=40, help_text='A label for URL config')
     class Meta:
@@ -14,10 +38,3 @@ class TagForm(forms.ModelForm):
 
     def clean_name(self):
         return self.cleaned_data['name'].lower()
-
-    def clean_slug(self):
-        new_slug = (self.cleaned_data['slug'].lower())
-
-        if new_slug == 'create':
-            rasie ValidationError('Can not choose create for Slug!')
-        return new_slug

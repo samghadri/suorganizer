@@ -7,5 +7,5 @@ class PostForm(forms.ModelForm):
         model = Post
         fields = '__all__'
 
-    def clean_data(self):
+    def clean_slug(self):
         return self.cleaned_data['slug'].lower()
