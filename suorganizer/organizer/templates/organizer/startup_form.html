@@ -1,4 +1,4 @@
-{% extends parent_template|default"organizer/base_organizer.html" %}
+{% extends parent_template|default:"organizer/base_organizer.html" %}
 
 {% block title %}
 {{ block.super }} - Startup Form
@@ -9,12 +9,12 @@
 
 <div class="container">
   <div>
-    <form action="{% url 'organizer_startup_create %'}" method="POST">
+    <form action="{% url 'organizer:organizer_startup_create' %}" method="POST">
       {% csrf_token %}
       {{ form.as_p }}
       <button type='submit'>Create Startup</button>
     </form>
   </div>
 </div>
-  
+
 {% endblock %}

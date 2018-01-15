@@ -7,7 +7,7 @@
 
 <div class="container">
   <div class="#">
-<form action="{% url 'organizer_newslink_create' %}" method="POST">
+<form action="{% url 'organizer:organizer_newslink_create' %}" method="POST">
   {% csrf_token %}
 {{ form.as_p }}
 

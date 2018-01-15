@@ -5,7 +5,11 @@
 {% endblock %}
 
 {% block content %}
+<div>
+  <a href="{% url 'organizer:organizer_startup_create' %}"> Create a Startup</a>
+</div>
 <h2>Startup List </h2>
+
 <ul>
   {% for startup in startup_list  %}
   <li>

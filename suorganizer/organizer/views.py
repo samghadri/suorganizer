@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, render,redirect
 from .models import Tag, StartUp
-from .forms import TagForm
+from .forms import TagForm, StartUpForm, NewsLinkForm
 from django.views.generic import View
 
 # from django.http.response import HttpResponse
@@ -54,8 +54,39 @@ def startup_list(request):
     return render(request, 'organizer/startup_list.html',
                         {'startup_list': StartUp.objects.all()})
 
+class StartupCreate(View):
+
+    form_class = StartUpForm
+    template_name = 'organizer/startup_form.html'
+
+    def get(self, request):
+        return render(request, self.template_name,{'form':self.form_class()})
+
+    def post(self, request):
+        bound_form = self.form_class(request.POST)
+        if bound_form.is_valid():
+            new_startup =  bound_form.save()
+            return redirect(new_startup)
+        else:
+            return render(request, self.template_name, {'form':bound_form})
+
+
 
 def startup_detail(request, slug):
     startup = get_object_or_404(StartUp, slug__iexact=slug)
     return render(request, 'organizer/startup_detail.html',
                             {'startup':startup})
+
+class NewsLinkCreate(View):
+    form_class = NewsLinkForm
+    template_name = 'organizer/newslink_form.html'
+    def get(self, request):
+        return render(request, self.template_name,{'form':self.form_class()})
+
+    def post(self, request):
+        bound_form = self.form_class(request.POST)
+        if bound_form.is_valid():
+            new_newslink = bound_form.save()
+            return redirect(new_newslink)
+        else:
+            return render(request, self.template_name, {'form':bound_form})

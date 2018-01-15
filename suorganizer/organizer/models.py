@@ -58,3 +58,6 @@ class NewsLink(models.Model):
         verbose_name = 'news article'
         ordering = ['-pub_date']
         get_latest_by = 'pub_date'
+
+    def get_absolute_url(self):
+        return self.startup.get_absolute_url()
