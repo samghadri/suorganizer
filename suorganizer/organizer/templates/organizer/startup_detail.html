@@ -34,6 +34,11 @@
 
 </section>
 {% endif %}
+<p>
+<a href="{% url 'organizer:organizer_newslink_create' %}">Add Article</a>
+</p>
+
+
 {% if startup.blog_posts.all %}
 <section>
   <h3>Blog Post{{ startup.blog_posts.all|pluralize }}</h3>
