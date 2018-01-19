@@ -10,6 +10,7 @@
 
     <form  action="{{ newslink.get_update_url }}" method="POST">
       {% csrf_token %}
+      {{ form.as_p }}
       <button type="submit">Update Article</button>
 
     </form>

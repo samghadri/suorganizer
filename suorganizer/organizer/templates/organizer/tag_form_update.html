@@ -10,6 +10,7 @@
 
     <form  action="{{ tag.get_update_url }}" method="POST">
       {% csrf_token %}
+      {{ form.as_p }}
       <button type="submit">Update Tag</button>
 
     </form>

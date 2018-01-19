@@ -7,6 +7,11 @@
 {% block content %}
 
 <h2> {{ tag.name|title }} </h2>
+<ul>
+<li>
+  <a href="{{ tag.get_update_url }}">Edit Tag</a>
+</li>
+</ul>
 {% if tag.startup_set.all %}
 <section>
 
