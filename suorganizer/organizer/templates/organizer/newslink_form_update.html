@@ -1,16 +1,16 @@
 {% extends parent_template|default:"organizer/base_organizer.html" %}
 
 {% block title %}
-{{ block.super }} - Update Tag
+{{ block.super }} - Update Your Article
 {% endblock %}
 {% block content %}
 
 <div class="container">
   <div class="#">
 
-    <form  action="{{ tag.get_update_url }}" method="POST">
+    <form  action="{{ newslink.get_update_url }}" method="POST">
       {% csrf_token %}
-      <button type="submit">Update Tag</button>
+      <button type="submit">Update Article</button>
 
     </form>
 
