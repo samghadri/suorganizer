@@ -5,7 +5,6 @@ from django.core.urlresolvers import reverse
 
 
 class Post(models.Model):
-
     title = models.CharField(max_length=50)
     slug = models.SlugField(max_length=50,
                             unique_for_month='pub_date',
@@ -42,5 +41,3 @@ class Post(models.Model):
         return reverse('blog_post_delete', kwargs={'year':self.pub_date.year,
                                                    'month': self.pub_date.month,
                                                    'slug': self.slug})
-
-    

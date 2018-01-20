@@ -11,7 +11,6 @@ class Tag(models.Model):
     def __str__(self):
         return self.name.title()
 
-
     class Meta:
         ordering = ['name']
 
@@ -22,6 +21,8 @@ class Tag(models.Model):
     def get_update_url(self):
         return reverse('organizer:organizer_tag_update', kwargs={'slug':self.slug})
 
+    def get_delete_url(self):
+        return reverse('organizer:organizer_tag_delete', kwargs={'slug':self.slug})
 
 
 class StartUp(models.Model):
@@ -51,11 +52,17 @@ class StartUp(models.Model):
     def get_update_url(self):
         return reverse('organizer:organizer_startup_update', kwargs={'slug':self.slug})
 
+    def get_delete_url(self):
+        return reverse('organizer:organizer_startup_delete', kwargs={'slug':self.slug})
+
+
 class NewsLink(models.Model):
     title = models.CharField(max_length=70)
     pub_date = models.DateField('date published')
     link = models.URLField(max_length=255)
     startup = models.ForeignKey(StartUp)
+    slug = models.SlugField(max_length=70)
+
 
     def __str__(self):
         return '{}:{}'.format(self.startup, self.title)
@@ -70,3 +77,6 @@ class NewsLink(models.Model):
 
     def get_update_url(self):
         return reverse('organizer:organizer_newslink_update', kwargs={'pk':self.pk})
+
+    def get_delete_url(self):
+        return reverse('organizer:organizer_newslink_delete', kwargs={'pk':self.pk})

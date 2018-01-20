@@ -14,7 +14,11 @@
   <li>
     <a href="{{ post.get_update_url }}">Edit Post</a>
   </li>
+  <li>
+    <a href="{{ post.get_delete_url }}">Delete Post</a>
+  </li>
 </ul>
+
 
 {% if post.startups.all or post.tags.all %}
 <footer>

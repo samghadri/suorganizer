@@ -1,8 +1,9 @@
 from django.shortcuts import get_object_or_404, render,redirect
+from django.core.urlresolvers import reverse_lazy
 from .models import Tag, StartUp, NewsLink
 from .forms import TagForm, StartUpForm, NewsLinkForm
 from django.views.generic import View
-from .utils import ObjectCreateMixin, ObjectUpdateMixin
+from .utils import ObjectCreateMixin, ObjectUpdateMixin, ObjectDeleteMixin
 
 # from django.http.response import HttpResponse
 # from django.template import loader, RequestContext
@@ -61,10 +62,15 @@ def startup_list(request):
     return render(request, 'organizer/startup_list.html',
                         {'startup_list': StartUp.objects.all()})
 
+class TagDelete(ObjectDeleteMixin, View):
+    model = Tag
+    success_url = reverse_lazy('organizer:organizer_tag_list')
+    template_name = 'organizer/tag_confirm_delete.html'
+
+
 class StartupCreate(ObjectCreateMixin, View):
 
     form_class = StartUpForm
-    model = StartUp
     template_name = 'organizer/startup_form.html'
 
     # def get(self, request):
@@ -87,6 +93,11 @@ def startup_detail(request, slug):
     startup = get_object_or_404(StartUp, slug__iexact=slug)
     return render(request, 'organizer/startup_detail.html',
                             {'startup':startup})
+
+class StartUpDelete(ObjectDeleteMixin, View):
+    model = StartUp
+    success_url = reverse_lazy('organizer:organizer_startup_list')
+    template_name = 'organizer/startup_confirm_delete.html'
 
 class NewsLinkCreate(ObjectCreateMixin, View):
     form_class = NewsLinkForm
@@ -122,3 +133,13 @@ class NewsLinkUpdate(View):
         else:
             context = {'form':bound_form,'newslink':newslink}
             return render(request,self.template_name, context)
+
+class NewsLinkDelete(View):
+    def get(self, request, pk):
+        newslink = get_object_or_404(NewsLink, pk=pk)
+        return render(request, 'organizer/newslink_confirm_delete.html')
+
+    def post(self, request, pk):
+        newslink = get_object_or_404(NewsLink, pk=pk)
+        startup = newslink.startup.delete()
+        return redirect(startup)
