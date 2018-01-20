@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'blog',
     'organizer',
+    'contact',
 ]
 
 MIDDLEWARE = [
@@ -80,6 +81,19 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'suorganizer.wsgi.application'
+
+
+#Email
+EMAIL_BACKEND = 'django.core.email.backends.console.EmailBackend'
+SERVER_EMAIL = 'sam.ghadri@gmail.com'
+DEFAULT_FROM_EMAIL = 'no-reply@samghadri.com'
+EMAIL_SUBJECT_PREFIX = '[Startup Organizer]'
+MANAGERS =(
+    ('Us', 'ourselves@django.com'),
+
+)
+
+
 
 
 # Database

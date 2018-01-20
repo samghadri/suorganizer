@@ -61,7 +61,6 @@ class NewsLink(models.Model):
     pub_date = models.DateField('date published')
     link = models.URLField(max_length=255)
     startup = models.ForeignKey(StartUp)
-    slug = models.SlugField(max_length=70)
 
 
     def __str__(self):
@@ -71,6 +70,7 @@ class NewsLink(models.Model):
         verbose_name = 'news article'
         ordering = ['-pub_date']
         get_latest_by = 'pub_date'
+
 
     def get_absolute_url(self):
         return self.startup.get_absolute_url()
