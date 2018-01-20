@@ -13,6 +13,5 @@ urlpatterns =[
     url(r'^startup/$', views.startup_list, name='organizer_startup_list'),
     url(r'^startup/create/$',views.StartupCreate.as_view(), name='organizer_startup_create'),
     url(r'^startup/(?P<slug>[-\w]+)/$', views.startup_detail, name='organizer_startup_detail'),
-    # url(r'^startup/(?P<slug>[-\w]+)/update/$', views.StartUpUpdate.as_view(), name='organizer_startup_update'),
-
+    url(r'^startup/(?P<slug>[-\w]+)/update/$', views.StartUpUpdate.as_view(), name='organizer_startup_update'),
 ]

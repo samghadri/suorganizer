@@ -48,8 +48,8 @@ class StartUp(models.Model):
         return reverse('organizer:organizer_startup_detail',
                         kwargs={'slug':self.slug})
 
-        def get_update_url(self):
-            return reverse('organizer:organizer_startup_update', kwargs={'slug':self.slug})
+    def get_update_url(self):
+        return reverse('organizer:organizer_startup_update', kwargs={'slug':self.slug})
 
 class NewsLink(models.Model):
     title = models.CharField(max_length=70)

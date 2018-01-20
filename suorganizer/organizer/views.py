@@ -64,6 +64,7 @@ def startup_list(request):
 class StartupCreate(ObjectCreateMixin, View):
 
     form_class = StartUpForm
+    model = StartUp
     template_name = 'organizer/startup_form.html'
 
     # def get(self, request):
@@ -77,7 +78,10 @@ class StartupCreate(ObjectCreateMixin, View):
     #     else:
     #         return render(request, self.template_name, {'form':bound_form})
 
-
+class StartUpUpdate(ObjectUpdateMixin, View):
+    form_class = StartUpForm
+    model = StartUp
+    template_name = 'organizer/startup_form_update.html'
 
 def startup_detail(request, slug):
     startup = get_object_or_404(StartUp, slug__iexact=slug)
