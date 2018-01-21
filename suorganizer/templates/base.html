@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>
       {% block title %}
         Startup Organizer
@@ -12,20 +13,37 @@
 
   <body>
 
-
-
-
-<div>
   <header>
+    <div class="">
     <h1>Startup Organizer</h1>
+        </div>
   </header>
+
+
+    {% if messages %}
+    <div class="">
+      <div class="">
+        <ul>
+          {% for message in messages %}
+          {% if message.tags %}
+          <li class="{{ message.tags }}"></li>
+          {% else %}
+          <li>
+            {% endif %}
+          {{ message }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    {% endif %}
+
+
   <main>
     {% block content %}
     This is a default content
     {% endblock %}
-
   </main>
-</div>
+
 
 <footer>
 <p>
@@ -37,7 +55,6 @@ Created for
 <a href="http://www.github.com"> Sam Django Solutions</a>
 </p>
 </footer>
-
 
   </body>
 </html>
