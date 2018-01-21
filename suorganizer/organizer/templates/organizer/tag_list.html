@@ -1,31 +1,35 @@
-{% extends parent_template|default:"organizer/base_organizer.html" %}
+{% extends "organizer/base_organizer.html" %}
 
 {% block title %}
 {{ block.super }} - Tag list
 {% endblock %}
 
 {% block content %}
-<h2>Tag List </h2>
-<div>
-  <a href="{% url 'organizer:organizer_tag_create' %}"> Create a Tag</a>
-</div>
+
+
+<center><h2><span class="badge badge-secondary">Tag List</span></h2></center>
+
 <ul>
   {% for tag in tag_list %}
-  <li>
-    <a href="{{ tag.get_absolute_url }}">{{ tag.name }}</a>
+  <div class="col-lg-3 col-md-6 cold-sm-12">
+  <li class="card">
+    <a class="card-header" href="{{ tag.get_absolute_url }}">{{ tag.name }}</a>
+    <div class="container">
+      <a class='btn btn-warning' href="{{ tag.get_update_url }}">Edit</a>
+      <a class='btn btn-danger' href="{{ tag.get_delete_url }}">Delete</a>
   </li>
-  <ul>
-  <li>
-    <a href="{{ tag.get_update_url }}">Edit Tag</a>
-  </li>
-  <li>
-    <a href="{{ tag.get_delete_url }}">Delete Tag</a>
-  </li>
-  </ul>
+
+  </div>
     {% empty %}
     <li>
       <em>There are No TAG Yet!!</em>
     </li>
   {% endfor %}
 </ul>
+</div>
+
+<div>
+  <a href="{% url 'organizer:organizer_tag_create' %}"> Create a Tag</a>
+</div>
+
 {% endblock %}
