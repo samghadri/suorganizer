@@ -1,0 +1,23 @@
+{% extends parent_template|default:"contact/base_contact.html" %}
+{% load bootstrap4 %}
+{% block title %}
+{{ block.super }} - Contact Us
+{% endblock %}
+
+{% block content %}
+
+<div class="#">
+  <div class="#">
+    <form action="{% url 'contact' %}" method="POST">
+      {% csrf_token %}
+      {% bootstrap_form form %}
+
+      <button class='btn btn-success btn-lg' type="submit">Contact Us</button>
+    </form>
+
+  </div>
+
+</div>
+
+
+{% endblock %}
