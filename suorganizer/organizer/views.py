@@ -4,6 +4,7 @@ from .models import Tag, StartUp, NewsLink
 from .forms import TagForm, StartUpForm, NewsLinkForm
 from django.views.generic import View
 from .utils import ObjectCreateMixin, ObjectUpdateMixin, ObjectDeleteMixin
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # from django.http.response import HttpResponse
 # from django.template import loader, RequestContext
@@ -58,14 +59,25 @@ class TagUpdate(ObjectUpdateMixin, View):
     template_name = 'organizer/tag_form_update.html'
 
 
-def startup_list(request):
-    return render(request, 'organizer/startup_list.html',
-                        {'startup_list': StartUp.objects.all()})
-
 class TagDelete(ObjectDeleteMixin, View):
     model = Tag
     success_url = reverse_lazy('organizer:organizer_tag_list')
     template_name = 'organizer/tag_confirm_delete.html'
+
+
+class StartupList(View):
+    page_kwarg = 'page'
+    paginate_by  = 1 #items per page
+    template_name = 'organizer/startup_list.html'
+
+    def get(self, request):
+        startups = StartUp.objects.all()
+        paginator = Paginator(startups, self.paginate_by)
+        page = paginator.page(1)
+        context = {'is_paginated': page.has_other_pages(),
+                   'paginator': paginator,
+                   'startup_list': page}
+        return render(request, self.template_name, context)
 
 
 class StartupCreate(ObjectCreateMixin, View):

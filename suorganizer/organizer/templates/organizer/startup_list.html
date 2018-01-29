@@ -33,4 +33,27 @@
   </ul>
   {% endfor %}
 </ul>
+
+{% if is_paginated %}
+<ul>
+
+{% if startup_list.has_previous %}
+<li>
+<a href="#">previous</a>
+</li>
+{% endif %}
+<li>
+Page {{ startup_list.number }}
+of {{ paginator.num_pages }}
+</li>
+{% if startup_list.has_next %}
+<li>
+<a href="#">next</a>
+
+</li>
+
+{% endif %}
+
+</ul>
+{% endif %}
 {% endblock %}

@@ -12,6 +12,7 @@ class PostList(View):
         return render(request,self.template_name,
                     {'post_list':Post.objects.all()})
 
+
 class PostCreate(View):
     form_class = PostForm
     template_name = 'blog/post_form.html'
