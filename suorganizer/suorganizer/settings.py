@@ -47,8 +47,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_extensions',
+    'bootstrap4',
     'blog',
     'organizer',
+    'contact',
 ]
 
 MIDDLEWARE = [
@@ -80,6 +82,18 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'suorganizer.wsgi.application'
+
+
+#Email
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+SERVER_EMAIL = 'sam.ghadri@gmail.com'
+DEFAULT_FROM_EMAIL = 'no-reply@gmail.com'
+EMAIL_SUBJECT_PREFIX = '[Startup Organizer]'
+MANAGERS =(
+    ('Us', 'sam.ghadri@gmail.com'),
+)
+
+
 
 
 # Database
@@ -130,3 +144,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR,'static')]

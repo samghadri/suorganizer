@@ -1,7 +1,12 @@
 <!DOCTYPE html>
+{% load staticfiles %}
 <html>
   <head>
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+   <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
     <title>
       {% block title %}
         Startup Organizer
@@ -12,21 +17,68 @@
 
   <body>
 
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'blog_post_list' %}">Blog List</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'organizer:organizer_startup_list' %}">Startup List</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'organizer:organizer_tag_list' %}">Tag List</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'contact' %}">Contact Us</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
 
+    
+<div class="container">
 
-
-<div>
   <header>
-    <h1>Startup Organizer</h1>
+    <div class="container">
+
+
+    <div class="jumbotron">
+    <center><h1>Startup Organizer</h1></center>
+        </div>
+            </div>
   </header>
+
+
+
+    {% if messages %}
+    <div class="">
+      <div class="">
+        <ul>
+          {% for message in messages %}
+          {% if message.tags %}
+          <li class="{{ message.tags }}"></li>
+          {% else %}
+          <li>
+            {% endif %}
+          {{ message }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    {% endif %}
+
+
   <main>
     {% block content %}
     This is a default content
     {% endblock %}
-
   </main>
-</div>
 
+    </div>
 <footer>
 <p>
 &copy;2017
@@ -38,6 +90,7 @@ Created for
 </p>
 </footer>
 
-
   </body>
+
+
 </html>

@@ -5,16 +5,53 @@
 {% endblock %}
 
 {% block content %}
+<div>
+  <a href="{% url 'organizer:organizer_startup_create' %}"> Create a Startup</a>
+</div>
 <h2>Startup List </h2>
+
 <ul>
   {% for startup in startup_list  %}
   <li>
     <a href="{{ startup.get_absolute_url }}">{{ startup.name }}</a>
   </li>
+
+  <ul>
+  <li>
+    <a href="{{ startup.get_update_url }}">Edit Startup</a>
+  </li>
+  </ul>
+
     {% empty %}
     <li>
       <em>There are No Startup Yet!!</em>
     </li>
+    <ul>
+    <li>
+      <a href="{{ newslink.get_update_url }}">Edit Article</a>
+    </li>
+  </ul>
   {% endfor %}
 </ul>
+
+{% if is_paginated %}
+<ul>
+
+{% if previous_page_url %}
+<li>
+<a href="{{ previous_page_url }}">Previous</a>
+</li>
+{% endif %}
+<li>
+Page {{ startup_list.number }}
+of {{ paginator.num_pages }}
+</li>
+{% if next_page_url %}
+<li>
+<a href="{{ next_page_url }}">Next</a>
+</li>
+{% endif %}
+</ul>
+
+{% endif %}
 {% endblock %}

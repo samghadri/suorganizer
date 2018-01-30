@@ -1,26 +1,57 @@
+{% extends "blog/base_blog.html" %}
+{% block title %}
+{{ block.super }} - BLog List
+
+{% endblock %}
+
+{% block content %}
+
+
+<div class="container">
+    <div class="row">
 {% for post in post_list  %}
+
+    <div class="card col-lg-6">
 <article>
   <header>
-    <h2>
+    <h2 class="card-header">
       <a href="{{ post.get_absolute_url }}">
         {{ post.title|title }}</a>
     </h2>
-    <p>
+    <div class="card-body">
+    <p class="card-text">
       written on:
       <time datetime="{{ post.pub_date|date:'Y-m-d' }}">
         {{ post.pub_date|date:'l,F jS,Y' }}
       </time>
-
     </p>
+        </div>
   </header>
 <p>{{ post.text|truncatewords:20 }}</p>
+<div class='container'>
 <p>
 <a href="{{ post.get_absolute_url }}">
   Read more&hellip;</a>
 </p>
+</div>
+<ul>
+  <li class='btn'>
+    <a class='btn btn-warning' href="{{ post.get_update_url }}">Edit</a>
+    <a class='btn btn-danger' href="{{ post.get_delete_url }}">Delete</a>
+  </li>
+</ul>
 
 </article>
+</div>
 
 {% empty %}
 <p><em>No Blog Posts available!</em></p>
 {% endfor %}
+
+<div class="container">
+  <a class='btn btn-success btn-lg' href="{% url 'blog_post_create' %}">Create Post</a>
+</div>
+</div>
+</div>
+
+{% endblock %}
