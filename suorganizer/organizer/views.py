@@ -10,9 +10,46 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 # from django.template import loader, RequestContext
 
 
-def tag_list(request):
-    return render(request, 'organizer/tag_list.html',
-                        {'tag_list': Tag.objects.all()})
+class Taglist(View):
+    page_kwarg = 'page'
+    template_name = 'organizer/tag_list.html'
+    paginate_by = 5
+
+    def get(self, request):
+        tags = Tag.objects.all()
+        paginator = Paginator(tags,
+                            self.paginate_by)
+        page_number = request.GET.get(self.page_kwarg)
+        try:
+            page = paginator.page(page_number)
+        except PageNotAnInteger:
+            page = paginator.page(1)
+        except EmptyPage:
+            page = paginator.page(paginator.num_pages)
+
+        if page.has_previous():
+            prev_url = "?{pkw}={n}".format(pkw=self.page_kwarg,
+                        n=page.previous_page_number())
+        else:
+            prev_url = None
+
+        if page.has_next():
+            next_url = '?{pkw}={n}'.format(pkw=self.page_kwarg,
+                        n=page.next_page_number())
+        else:
+            next_url = None
+
+        context = {
+            "is_paginated": page.has_other_pages(),
+            "next_page_url": next_url,
+            "paginator": paginator,
+            "previous_page_url": prev_url,
+            'tag_list': page}
+
+        return render(request, self.template_name, context)
+# def tag_list(request):
+#     return render(request, 'organizer/tag_list.html',
+#                         {'tag_list': Tag.objects.all()})
     # tag_list = Tag.objects.all()
     # template = loader.get_template('organizer/tag_list.html')
     # context = RequestContext(request,{'tag_list': tag_list})

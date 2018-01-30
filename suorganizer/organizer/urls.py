@@ -5,7 +5,8 @@ app_name = 'organizer'
 
 urlpatterns =[
     url(r'^tag/create/$', views.TagCreate.as_view(), name= 'organizer_tag_create'),
-    url(r'^tag/$', views.tag_list, name='organizer_tag_list'),
+    url(r'^tag/$', views.Taglist.as_view(), name='organizer_tag_list'),
+    # url(r'^((?P<page_number>\d+))?$', views.TagPageList.as_view(), name='organizer_tag_page'),
     url(r'^tag/(?P<slug>[-\w]+)/$', views.tag_detail, name='organizer_tag_detail'),
     url(r'^tag/(?P<slug>[-\w]+)/update/$', views.TagUpdate.as_view(), name='organizer_tag_update'),
     url(r'^tag/(?P<slug>[-\w]+)/delete/$', views.TagDelete.as_view(), name='organizer_tag_delete'),
