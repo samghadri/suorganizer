@@ -27,6 +27,11 @@ class TagModelTest(TestCase):
 
 class StartupModelTest(TestCase):
 
+    @classmethod
+    def setUpCreate(cls):
+        StartUp.objects.create(name='TMT',slug='tmt')
+
+
     def test_string_representation(self):
         startup = StartUp(name='TMT')
         self.assertEqual(str(startup),startup.name)
@@ -45,11 +50,19 @@ class StartupModelTest(TestCase):
         max_length = startup._meta.get_field('name').max_length
         self.assertEquals(max_length,50)
 
-
     def test_get_absolute_url(self):
         startup = StartUp(slug='vertex')
         #This will also fail if the urlconf is not defined.
         self.assertEquals(startup.get_absolute_url(),'/startup/vertex/')
+    def test_view_url_exists_at_desired_location(self):
+        resp = self.client.get('/startup/')
+        self.assertEqual(resp.status_code, 200)
+
 
 class NewsLinkModelTest(TestCase):
     pass
+
+    # def test_object_name_is_last_name_comma_first_name(self):
+    #     newslink=NewsLink(id=1)
+    #     expected_object_name = '{}:{}'.format(newslink.startups, newslink.title)
+    #     self.assertEquals(expected_object_name,str(newslink))
