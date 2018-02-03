@@ -46,6 +46,7 @@ class StartUp(models.Model):
         verbose_name_plural = "Startups"
 
 
+
     def get_absolute_url(self):
         return reverse('organizer:organizer_startup_detail',
                         kwargs={'slug':self.slug})
