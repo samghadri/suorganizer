@@ -43,6 +43,7 @@ class StartUp(models.Model):
     class Meta:
         ordering = ['name']
         get_latest_by = 'founded_date'
+        verbose_name_plural = "Startups"
 
 
     def get_absolute_url(self):

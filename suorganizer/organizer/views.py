@@ -104,30 +104,12 @@ class TagDelete(ObjectDeleteMixin, View):
 
 class StartupList(View):
     page_kwarg = 'page'
-<<<<<<< HEAD
-    paginate_by  = 5 #items per page
-=======
     paginate_by  = 1 #items per page
->>>>>>> 373d39fc627fd105dbf5742f92f96e6e5549813d
     template_name = 'organizer/startup_list.html'
 
     def get(self, request):
         startups = StartUp.objects.all()
         paginator = Paginator(startups, self.paginate_by)
-<<<<<<< HEAD
-        page = paginator.page(1)
-        context = {'is_paginated': page.has_other_pages(),
-                   'paginator': paginator,
-                   'startup_list': page}
-        return render(request, self.template_name, context)
-
-
-class StartupCreate(ObjectCreateMixin, View):
-
-    form_class = StartUpForm
-    template_name = 'organizer/startup_form.html'
-
-=======
         page_number = request.GET.get(self.page_kwarg)
         try:
             page = paginator.page(page_number)
@@ -160,7 +142,6 @@ class StartupCreate(ObjectCreateMixin, View):
     form_class = StartUpForm
     template_name = 'organizer/startup_form.html'
 
->>>>>>> 373d39fc627fd105dbf5742f92f96e6e5549813d
     # def get(self, request):
     #     return render(request, self.template_name,{'form':self.form_class()})
     #
